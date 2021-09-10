@@ -21,28 +21,38 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
   late PackageModel selectedPackage;
   late List<PackageModel> packages = [];
 
+  int counter = 1;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    packages.add(PackageModel(
+    packages.add(
+      PackageModel(
         packageName: 'Monthly',
         amount: 199,
         description: '',
         discount: 0,
-        durationInDays: 30));
+        durationInDays: 30,
+        durationInMonths: 1,
+      ),
+    );
     packages.add(PackageModel(
-        packageName: 'Quarterly',
-        amount: 1199,
-        description: '',
-        discount: 0,
-        durationInDays: 90));
+      packageName: 'Quarterly',
+      amount: 1199,
+      description: '',
+      discount: 0,
+      durationInDays: 90,
+      durationInMonths: 3,
+    ));
     packages.add(PackageModel(
-        packageName: 'Annually',
-        amount: 1199,
-        description: '',
-        discount: 0,
-        durationInDays: 365));
+      packageName: 'Annually',
+      amount: 1199,
+      description: '',
+      discount: 0,
+      durationInDays: 365,
+      durationInMonths: 12,
+    ));
 
     selectedPackage = packages.first;
   }
@@ -180,67 +190,286 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
               Container(
                 width: size.width,
                 decoration: BoxDecoration(border: Border.all(color: grayy)),
-                child: Column(
-                  children: [
-                    Text(
-                      'Back',
-                      style: TextStyle(color: Colors.black, fontSize: 12),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: SizedBox(
-                        height: 55,
-                        width: size.width,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: AlwaysScrollableScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              width: 100,
-                              decoration: BoxDecoration(
-                                color: purpleAccent,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Icon(
-                                        Icons.circle,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        '${packages[index].packageName}',
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 30, 0, 20),
+                  child: Column(
+                    // MAIN COLUMN ####################################################
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Professional Plan',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          for (var p in packages)
+                            InkWell(
+                              onTap: () {
+                                selectedPackage = p;
+                                setState(() {});
+                              },
+                              child: Container(
+                                width: size.width * 0.23,
+                                height: size.height * 0.06,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Color(0xffA59292),
+                                  ),
+                                  color: selectedPackage == p
+                                      ? purpleAccent
+                                      : Colors.white,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        if (selectedPackage == p)
+                                          Stack(
+                                            children: [
+                                              Icon(
+                                                Icons.circle_outlined,
+                                                color: Colors.white,
+                                                size: 24,
+                                              ),
+                                              Positioned(
+                                                right: 1,
+                                                left: 1,
+                                                top: 1,
+                                                bottom: 1,
+                                                child: Icon(
+                                                  Icons.circle,
+                                                  color: purpleAccent,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                              Positioned(
+                                                right: 1,
+                                                left: 1,
+                                                top: 1,
+                                                bottom: 1,
+                                                child: Icon(Icons.circle,
+                                                    color: Colors.white,
+                                                    size: 12),
+                                              ),
+                                            ],
+                                          )
+                                        else
+                                          Icon(Icons.circle_outlined,
+                                              color: purpleAccent, size: 24),
+                                        Text(
+                                          '${p.packageName}',
+                                          style: TextStyle(
+                                            color: selectedPackage == p
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 12),
+                                      child: Text(
+                                        '₹${p.amount}',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: selectedPackage == p
+                                              ? Colors.white
+                                              : Colors.black,
                                           fontSize: 12,
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 12),
-                                    child: Text(
-                                      '₹${packages[index].amount}',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                        ],
+                      ),
+                      Divider(
+                        indent: 20,
+                        endIndent: 20,
+                        color: Color(0xff74838C),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 30,
+                                      width: 100,
+                                      child: Row(
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              if (counter > 1) {
+                                                counter--;
+                                                setState(() {});
+                                              }
+                                            },
+                                            child: Container(
+                                              width: 30,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                color: purpleAccent,
+                                                borderRadius:
+                                                    BorderRadius.horizontal(
+                                                  left: Radius.circular(3),
+                                                ),
+                                              ),
+                                              child: Icon(
+                                                Icons.remove,
+                                                color: Colors.white,
+                                                size: 16,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 40,
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xffEEEEF1),
+                                              borderRadius:
+                                                  BorderRadius.horizontal(),
+                                            ),
+                                            child: Center(
+                                                child: Text(
+                                              '$counter',
+                                              style: TextStyle(fontSize: 12),
+                                            )),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              counter++;
+                                              setState(() {});
+                                            },
+                                            child: Container(
+                                              width: 30,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                color: purpleAccent,
+                                                borderRadius:
+                                                    BorderRadius.horizontal(
+                                                  right: Radius.circular(3),
+                                                ),
+                                              ),
+                                              child: Icon(
+                                                Icons.add,
+                                                color: Colors.white,
+                                                size: 16,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(width: 20),
+                                    Text(
+                                      'Members',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            );
-                          },
-                        ),
+                              Text(
+                                '₹19 x $counter Licence x ${selectedPackage.durationInMonths} month',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xff505657)),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            '₹${counter * 19}',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                                color: purpleAccent),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${selectedPackage.packageName} Charge',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black),
+                          ),
+                          Text(
+                            '₹${selectedPackage.amount}',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: purpleAccent),
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        indent: 20,
+                        endIndent: 20,
+                        color: Color(0xff74838C),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Total',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black),
+                          ),
+                          Text(
+                            '₹${(counter*19)+selectedPackage.amount}',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: purpleAccent),
+                          ),
+                        ],
+                      ),
+                      Center(
+                        child: MaterialButton(
+                          minWidth: size.width,
+                          height: 45,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          onPressed: () {},
+                          color: purpleAccent,
+                          child: Text(
+                            'Checkout',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               Container(),
