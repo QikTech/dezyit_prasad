@@ -192,7 +192,7 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
                 width: size.width,
                 decoration: BoxDecoration(border: Border.all(color: grayy)),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 30, 0, 20),
+                  padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
                   child: Column(
                     // MAIN COLUMN ####################################################
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -410,6 +410,7 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 20,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -429,11 +430,15 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 20,),
+
                       Divider(
                         indent: 20,
                         endIndent: 20,
                         color: Color(0xff74838C),
                       ),
+                      SizedBox(height: 20,),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -453,6 +458,8 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
                           ),
                         ],
                       ),
+                      SizedBox(height: 20,),
+
                       Center(
                         child: MaterialButton(
                           minWidth: size.width,
@@ -463,7 +470,7 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Checkout()),
+                              MaterialPageRoute(builder: (context) => Checkout(selectedPackage,counter),),
                             );
                           },
                           color: purpleAccent,

@@ -1,18 +1,31 @@
+import 'package:dezyit_prasad/models/packageModel.dart';
 import 'package:dezyit_prasad/screens/PaymentResult.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
+
 import 'PlansAndPricing.dart';
 
 class Checkout extends StatefulWidget {
+  final PackageModel model;
+  final int  totalMember;
+
+  Checkout(this.model,this.totalMember);
+
   @override
-  _CheckoutState createState() => _CheckoutState();
+  _CheckoutState createState() => _CheckoutState(pm: this.model, counter: this.totalMember);
 }
 
 class _CheckoutState extends State<Checkout> {
 
+  PackageModel? pm ;
+  int counter;
+
+  _CheckoutState({required this.pm, required this.counter});
   @override
   Widget build(BuildContext context) {
+
+    print(pm!.amount);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -73,19 +86,19 @@ class _CheckoutState extends State<Checkout> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '2 Members',
+                                '$counter Members',
                                 style:
                                     TextStyle(fontSize: 18, color: Colors.white),
                               ),
                               Text(
-                                '₹19 x 2 Licence x 1 month',
+                                '₹19 x $counter Licence x 1 month',
                                 style:
                                     TextStyle(fontSize: 12, color: Colors.white),
                               ),
                             ],
                           ),
                           Text(
-                            '₹38',
+                            '₹${counter*19}',
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                         ],
@@ -95,11 +108,11 @@ class _CheckoutState extends State<Checkout> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Monthly Charge',
+                            '${pm!.packageName} Charge',
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                           Text(
-                            '₹199',
+                            '₹${pm!.amount}',
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                         ],
@@ -117,7 +130,7 @@ class _CheckoutState extends State<Checkout> {
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                           Text(
-                            '₹199',
+                            '₹${19*counter+pm!.amount}',
                             style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.white,
