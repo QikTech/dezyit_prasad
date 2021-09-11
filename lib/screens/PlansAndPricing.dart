@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:dezyit_prasad/models/packageModel.dart';
+import 'package:dezyit_prasad/screens/checkout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -203,6 +204,7 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
                             fontSize: 18,
                             fontWeight: FontWeight.w700),
                       ),
+                      SizedBox(height: 10,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -295,6 +297,7 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
                             )
                         ],
                       ),
+                      SizedBox(height: 10,),
                       Divider(
                         indent: 20,
                         endIndent: 20,
@@ -442,7 +445,7 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
                                 color: Colors.black),
                           ),
                           Text(
-                            '₹${(counter*19)+selectedPackage.amount}',
+                            '₹${(counter * 19) + selectedPackage.amount}',
                             style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
@@ -457,7 +460,12 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Checkout()),
+                            );
+                          },
                           color: purpleAccent,
                           child: Text(
                             'Checkout',
@@ -467,12 +475,123 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
                                 color: Colors.white),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
-              Container(),
+              Container(
+                width: size.width,
+                color: Color(0xffEEEEF1),
+                child: Column(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Text(
+                            "FAQ's",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20,),
+                          child: Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image(
+                                    image: AssetImage('assets/icons/FAQs.png'),
+                                    height: 25,
+                                    width: 25,
+                                  ),
+                                  Text(
+                                    'What types of parts can you make?',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        color: purpleAccent),
+                                  ),
+                                  Icon(Icons.add, color: purpleAccent,size: 18,),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 14),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20,),
+                          child: Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image(
+                                    image: AssetImage('assets/icons/FAQs.png'),
+                                    height: 25,
+                                    width: 25,
+                                  ),
+                                  Text(
+                                    'What types of parts can you make?',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        color: purpleAccent),
+                                  ),
+                                  Icon(Icons.add, color: purpleAccent,size: 18,),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 14),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20,),
+                          child: Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Image(
+                                    image: AssetImage('assets/icons/FAQs.png'),
+                                    height: 25,
+                                    width: 25,
+                                  ),
+                                  Text(
+                                    'What types of parts can you make?',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        color: purpleAccent),
+                                  ),
+                                  Icon(Icons.add, color: purpleAccent,size: 18,),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                  ],
+                ),
+
+              ),
             ],
           ),
         ),
