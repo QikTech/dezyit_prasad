@@ -1,4 +1,7 @@
-import 'package:dezyit_prasad/screens/PlansAndPricing.dart';
+import 'package:dezyit_prasad/screens/MicroServices/MicroServices.dart';
+import 'package:dezyit_prasad/screens/ModulesList.dart';
+import 'package:dezyit_prasad/screens/PaymentPortal/Manage%20Team.dart';
+import 'package:dezyit_prasad/screens/PaymentPortal/PlansAndPricing.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: PlansAndPricing(),
+      home: ModulesList(),
     );
   }
 }

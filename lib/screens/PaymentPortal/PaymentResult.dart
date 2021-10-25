@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dezyit_prasad/screens/checkout.dart';
-import 'colors.dart';
+import 'package:dezyit_prasad/screens/PaymentPortal/checkout.dart';
+import '../colors.dart';
 import 'PlansAndPricing.dart';
 
 class PaymentResult extends StatefulWidget {
@@ -14,6 +14,7 @@ class _PaymentResultState extends State<PaymentResult> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(30.0),

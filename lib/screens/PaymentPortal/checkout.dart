@@ -1,8 +1,9 @@
 import 'package:dezyit_prasad/models/packageModel.dart';
-import 'package:dezyit_prasad/screens/PaymentResult.dart';
+import 'package:dezyit_prasad/screens/PaymentPortal/PaymentResult.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'colors.dart';
+import '../GlobalAppBar.dart';
+import '../colors.dart';
 
 import 'PlansAndPricing.dart';
 
@@ -28,43 +29,9 @@ class _CheckoutState extends State<Checkout> {
     print(pm!.amount);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 8,
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Text('Plans And Pricing',
-            style: AppBarTheme.of(context).titleTextStyle),
-        leading: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-          child: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Row(
-              children: [
-                Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
-                  size: 12,
-                ),
-                Text('Back',
-                    style: TextStyle(color: Colors.black, fontSize: 12))
-              ],
-            ),
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-            child: Image(
-              image: AssetImage('assets/icons/Profile.png'),
-              height: 20,
-              width: 20,
-            ),
-          )
-        ],
-      ),
+      appBar: GlobalAppBar('Plans And Pricing',true),
       body: Container(
+        color: Colors.white,
         child: SingleChildScrollView(
           child: Column(
             //FIRST COLUMN ##########################
@@ -331,7 +298,7 @@ class _CheckoutState extends State<Checkout> {
                     'Checkout',
                     style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w400,
                         color: Colors.white),
                   ),
                 ),
