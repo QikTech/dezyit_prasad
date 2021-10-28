@@ -19,7 +19,7 @@ class _PlansAndPricingState extends State<PlansAndPricing> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: GlobalAppBar('Plans And Pricing',true),
+      appBar: GlobalAppBar('Plans And Pricing', true),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -85,12 +85,10 @@ class _PlansAndPricing_1State extends State<PlansAndPricing_1> {
                   height: 218,
                   width: size.width,
                   child: CarouselSlider.builder(
-
                     options: CarouselOptions(
-                      onPageChanged: (index, _){
-                        setState((){
+                      onPageChanged: (index, _) {
+                        setState(() {
                           _current = index;
-
                         });
                       },
                       enlargeCenterPage: true,
@@ -99,11 +97,10 @@ class _PlansAndPricing_1State extends State<PlansAndPricing_1> {
                       enableInfiniteScroll: false,
                       // autoPlay: true,
                     ),
-
                     itemCount: pricingCardImages.length,
-                    itemBuilder: (BuildContext context, int index,
-                            int pageViewIndex) =>
-                        Padding(
+                    itemBuilder:
+                        (BuildContext context, int index, int pageViewIndex) =>
+                            Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Container(
                         decoration: BoxDecoration(
@@ -127,9 +124,7 @@ class _PlansAndPricing_1State extends State<PlansAndPricing_1> {
                                   image: AssetImage(pricingCardImages[index]
                                       ['pricingCardImage'])),
                               Spacer(),
-                              Text(
-                                  pricingCardImages[index]
-                                      ['pricingCardTitle'],
+                              Text(pricingCardImages[index]['pricingCardTitle'],
                                   style: TextStyle(
                                       color: Color(0xff787CD1), fontSize: 14),
                                   textAlign: TextAlign.center),
@@ -151,19 +146,20 @@ class _PlansAndPricing_1State extends State<PlansAndPricing_1> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: pricingCardImages.map((image) {       //these two lines
-                  int index=pricingCardImages.indexOf(image); //are changed
-                  return Container(
-                    width: 12,
-                    height: 12,
-                    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _current == index
-                            ? purpleAccent
-                            : grayy),
-                  );
-                },
+                children: pricingCardImages.map(
+                  (image) {
+                    //these two lines
+                    int index = pricingCardImages.indexOf(image); //are changed
+                    return Container(
+                      width: 12,
+                      height: 12,
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _current == index ? purpleAccent : grayy),
+                    );
+                  },
                 ).toList(),
               ),
             ],
