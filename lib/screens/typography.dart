@@ -26,3 +26,12 @@ final grayRegular18 = TextStyle(fontSize: 18, color: grayy, fontWeight: FontWeig
 
 
 final whiteSub16 = TextStyle(fontSize: 16, color: whitee, fontWeight: FontWeight.normal);
+
+
+Widget verticalSpace({required double height}) {
+  return SizedBox(height: height,);
+}
+
+Widget horizontalSpace({required double width}) {
+  return SizedBox(width: width,);
+}
