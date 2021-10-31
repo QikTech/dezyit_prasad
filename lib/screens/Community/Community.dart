@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../GlobalAppBar.dart';
 import '../colors.dart';
-import '../typography.dart';
-import 'Blog.dart';
 
 class Community extends StatefulWidget {
   const Community({Key? key}) : super(key: key);
@@ -15,7 +13,6 @@ class Community extends StatefulWidget {
 }
 
 class _CommunityState extends State<Community> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,12 +90,6 @@ class _CustomSearchState extends State<CustomSearch> {
                           onPressed: () {
                             debugPrint('222');
                             print(_searchText.text);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Blog(),
-                                ),
-                              );
                           })),
                 ),
               ),
@@ -132,7 +123,6 @@ class _BlogCategoriesState extends State<BlogCategories> {
     print(blogCategoriesList[index]['categoryName']);
     print(blogCategoriesList[index]['categoryIsSelected']);
     setState(() => _selectedBlogCategoriesItem = index);
-    return CommunityBlogs();
   }
 
   @override
@@ -155,9 +145,7 @@ class _BlogCategoriesState extends State<BlogCategories> {
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                       elevation: 2,
                       child: InkWell(
-                        onTap: () {
-                          _onSelected(index);
-                        },
+                        onTap: () => _onSelected(index),
                         child: Container(
                           padding:
                               EdgeInsets.symmetric(vertical: 5, horizontal: 12),
@@ -208,7 +196,7 @@ class _CommunityBlogsState extends State<CommunityBlogs> {
     communityBlogs.add(
       CommunityModel(
           blogAuthor: 'Prasad Sawant',
-          blogCategory: ['explore','Empathise'],
+          blogCategory: 'explore',
           blogDescription:
               "Try correcting the name to the name of an existing setter, or defining a setter or field named ",
           blogImage: 'image.png',
@@ -218,7 +206,7 @@ class _CommunityBlogsState extends State<CommunityBlogs> {
     communityBlogs.add(
       CommunityModel(
           blogAuthor: 'Prasad Sawant',
-          blogCategory: ['explore','goals','Empathise'],
+          blogCategory: 'explore',
           blogDescription:
               "Try correcting the name to the name of an existing setter, or defining a setter or field named ",
           blogImage: 'image.png',
@@ -228,7 +216,7 @@ class _CommunityBlogsState extends State<CommunityBlogs> {
     communityBlogs.add(
       CommunityModel(
           blogAuthor: 'Prasad Sawant',
-          blogCategory: ['explore','goals'],
+          blogCategory: 'explore',
           blogDescription:
               "Try correcting the name to the name of an existing setter, or defining a setter or field named ",
           blogImage: 'image.png',
@@ -238,27 +226,7 @@ class _CommunityBlogsState extends State<CommunityBlogs> {
     communityBlogs.add(
       CommunityModel(
           blogAuthor: 'Prasad Sawant',
-          blogCategory: ['explore'],
-          blogDescription:
-              "Try correcting the name to the name of an existing setter, or defining a setter or field named ",
-          blogImage: 'image.png',
-          blogName: 'Angular Development',
-          blogViews: 200),
-    );
-    communityBlogs.add(
-      CommunityModel(
-          blogAuthor: 'Prasad Sawant',
-          blogCategory: ['goals'],
-          blogDescription:
-              "Try correcting the name to the name of an existing setter, or defining a setter or field named ",
-          blogImage: 'image.png',
-          blogName: 'Angular Development',
-          blogViews: 200),
-    );
-    communityBlogs.add(
-      CommunityModel(
-          blogAuthor: 'Prasad Sawant',
-          blogCategory: ['Empathise'],
+          blogCategory: 'explore',
           blogDescription:
               "Try correcting the name to the name of an existing setter, or defining a setter or field named ",
           blogImage: 'image.png',
@@ -269,74 +237,46 @@ class _CommunityBlogsState extends State<CommunityBlogs> {
     selectedBlog = communityBlogs.first;
   }
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: SizedBox(
-        height: 800,
-        width: double.infinity,
-        child: ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            itemCount: communityBlogs.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Material(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: SizedBox(
+          height: 800,
+          width: double.infinity,
+          child:  ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemCount: communityBlogs.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Material(
                   borderRadius: BorderRadius.circular(10),
                   elevation: 5,
                   child: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10)),
                     width: double.infinity,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.network(
                             'https://static.wixstatic.com/media/ec9816_120f89a1570549e882031fbfb5ee5905~mv2.png/v1/fill/w_600,h_450,al_c,q_95/Design%20Sprint%20-%20Design%20Thinking%20-%20Graphi.webp',
                             height: 100,
                             fit: BoxFit.fill),
-                        Text(
-                          communityBlogs[index].blogName,
-                          style: blackBoldText18,
-                        ),
-                        VerticalSpace(10),
-                        Text(
-                          communityBlogs[index].blogDescription,
-                          style: grayRegular14,
-                        ),
-                        VerticalSpace(10),
-                        Row(
-                          children: [
-                            Text(
-                              'by:${communityBlogs[index].blogAuthor}',
-                              style: grayRegular12,
-                            ),
-                            Spacer(),
-                            Icon(
-                              Icons.remove_red_eye_outlined,
-                              color: Color(0xff707070),
-                              size: 18,
-                            ),
-                            Text(
-                              communityBlogs[index].blogViews.toString(),
-                              style: grayRegular12,
-                            ),
-                          ],
-                        ),
+                        Text(communityBlogs[index].blogName),
+                        Text(communityBlogs[index].blogDescription),
+                        Text('by:${communityBlogs[index].blogAuthor}'),
+                        Row(children: [
+                          Icon(Icons.remove_red_eye_outlined),
+                          Text(communityBlogs[index].blogViews.toString())
+                        ]),
                       ],
                     ),
                   ),
-                ),
-              );
-            }),
+                );
+              }),
+
+        ),
       ),
     );
   }
@@ -364,3 +304,4 @@ class _CommunityBlogsState extends State<CommunityBlogs> {
 // ),
 // ),
 // );
+

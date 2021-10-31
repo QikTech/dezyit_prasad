@@ -5,7 +5,7 @@ class CommunityModel{
   late String blogAuthor;
   late double blogViews;
   late String blogDescription;
-  late List<String> blogCategory;
+  late String blogCategory;
 
 
   CommunityModel({
