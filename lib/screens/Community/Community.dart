@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../GlobalAppBar.dart';
 import '../colors.dart';
+import '../typography.dart';
+import 'BlogScreen.dart';
 
 class Community extends StatefulWidget {
   const Community({Key? key}) : super(key: key);
@@ -19,19 +21,16 @@ class _CommunityState extends State<Community> {
     {'categoryName': 'explore', 'categoryIsSelected': true},
     {'categoryName': 'goals', 'categoryIsSelected': true},
     {'categoryName': 'empathise', 'categoryIsSelected': true},
-    {'categoryName': 'empathise', 'categoryIsSelected': true},
+    {'categoryName': 'em', 'categoryIsSelected': true},
     {'categoryName': 'empathise', 'categoryIsSelected': true},
   ];
 
   dynamic _selectedBlogCategoriesItem;
 
-
   late CommunityModel selectedBlog;
-
   late List<CommunityModel> communityBlogs = [];
   late List<CommunityModel> filteredCommunityBlogs = [];
   final _searchText = TextEditingController();
-
   bool isLoading = false;
 
   searchBlogs(String keyword) {
@@ -40,21 +39,19 @@ class _CommunityState extends State<Community> {
     });
     filteredCommunityBlogs = [];
     communityBlogs.forEach((element) {
-      print('${element.blogName}');
+      // print('${element.blogName}');
       if (element.blogName.toLowerCase().contains(keyword.toLowerCase()) ||
           element.blogAuthor.toLowerCase().contains(keyword)) {
-        print('asdasdasd');
+        // print('asdasdasd');
         filteredCommunityBlogs.add(element);
       }
     });
-    Future.delayed(
-        Duration(milliseconds: 500), (){
+    Future.delayed(Duration(milliseconds: 500), () {
       setState(() {
         isLoading = false;
       });
     });
-
-  }
+  } //<--SEARCH FUNCTION
 
   @override
   void initState() {
@@ -107,8 +104,8 @@ class _CommunityState extends State<Community> {
 
   @override
   Widget build(BuildContext context) {
-    print(filteredCommunityBlogs.length);
-    print(communityBlogs.length);
+    // print(filteredCommunityBlogs.length);
+    // print(communityBlogs.length);
     return Scaffold(
       appBar: GlobalAppBar('Community', true),
       body: SafeArea(
@@ -172,43 +169,59 @@ class _CommunityState extends State<Community> {
                   ),
                 ),
               ),
-            ),
+            ), //<-- Searching
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Wrap(
                 direction: Axis.horizontal,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: blogCategoriesList.map((item) {
-                  return InkWell(
-                    onTap: () => setState(() => _selectedBlogCategoriesItem = item),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                  return Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: InkWell(
+                      onTap: () =>
+                          setState(() => _selectedBlogCategoriesItem = item),
                       child: IntrinsicWidth(
                         child: Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 12),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color:
-                              _selectedBlogCategoriesItem == item
-                                  ? purpleAccent
-                                  : Colors.white,
-                              //                   <--- border color
-                              width: 1,
+                          padding:
+                              EdgeInsets.symmetric(vertical: 5, horizontal: 14),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.15),
+                                  spreadRadius: 0,
+                                  blurRadius: 10,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
+                              color: Colors.white,
+                              border: Border.all(
+                                color: _selectedBlogCategoriesItem == item
+                                    ? purpleAccent
+                                    : Colors.white,
+                                //                   <--- border color
+                                width: 1,
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(4))),
+                          child: Center(
+                            child: Text(
+                              '#${item['categoryName']}',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Color(0xff707070),
+                                fontSize: 14,
+                              ),
                             ),
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(4))),
-                        child: Center(
-                          child: Text('#${item['categoryName']}',
-                            textAlign: TextAlign.center,
                           ),
                         ),
-                    ),
                       ),
                     ),
                   );
                 }).toList(),
               ),
-            ),
+            ), //<-- Sorting
             Expanded(
               child: isLoading
                   ? Container(
@@ -216,42 +229,80 @@ class _CommunityState extends State<Community> {
                         child: CircularProgressIndicator(),
                       ),
                     )
-                  : (_searchText.text.isNotEmpty && filteredCommunityBlogs.isEmpty) ? NotFound() :ListView.builder(
-                      itemCount: (_searchText.text.isEmpty)
-                          ? communityBlogs.length
-                          : filteredCommunityBlogs.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (_searchText.text.isEmpty) {
-                          print('here');
-                          print(communityBlogs[index].blogCategory.toLowerCase());
-                          print(_selectedBlogCategoriesItem['categoryName'].toString().toLowerCase());
-                          if(communityBlogs[index].blogCategory.toLowerCase() == _selectedBlogCategoriesItem['categoryName'].toString().toLowerCase() || _selectedBlogCategoriesItem['categoryName'].toString().toLowerCase() == 'all') {
-                            print('here1');
-                            return CommunityBlogs(
-                              selectedBlog: communityBlogs[index],
-                            );
-                          }else{
-                            return SizedBox.shrink();
-                          }
-
-                        } else {
-                          if(filteredCommunityBlogs.isEmpty){
-                            return Container(
-                              child : Center(child: Text('EmptyScreen'))
-                            );
-                          }else{
-                            if(communityBlogs[index].blogCategory.toLowerCase() == _selectedBlogCategoriesItem['categoryName'].toString().toLowerCase() || _selectedBlogCategoriesItem['categoryName'].toString().toLowerCase() == 'all') {
-                              return CommunityBlogs(
-                                selectedBlog: filteredCommunityBlogs[index],
+                  : (_searchText.text.isNotEmpty &&
+                          filteredCommunityBlogs.isEmpty)
+                      ? NotFound()
+                      : ListView.builder(
+                        itemCount: (_searchText.text.isEmpty)
+                            ? communityBlogs.length
+                            : filteredCommunityBlogs.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (_searchText.text.isEmpty) {
+                            // print('here');
+                            // print(communityBlogs[index].blogCategory.toLowerCase());
+                            // print(_selectedBlogCategoriesItem['categoryName'].toString().toLowerCase());
+                            if (communityBlogs[index]
+                                        .blogCategory
+                                        .toLowerCase() ==
+                                    _selectedBlogCategoriesItem[
+                                            'categoryName']
+                                        .toString()
+                                        .toLowerCase() ||
+                                _selectedBlogCategoriesItem['categoryName']
+                                        .toString()
+                                        .toLowerCase() ==
+                                    'all') {
+                              // print('here1');
+                              return InkWell(
+                                onTap: () {
+                                  print(communityBlogs[index].blogName);
+                                  Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlogScreen(blogName: communityBlogs[index].blogName,
+                                        blogDesc: communityBlogs[index].blogDescription,
+                                        blogAuthor: communityBlogs[index].blogAuthor,
+                                        blogViews: communityBlogs[index].blogViews,),
+                                  ),
+                                );
+                                },
+                                child: CommunityBlogs(
+                                  selectedBlog: communityBlogs[index],
+                                ),
                               );
-                            }else{
+                            } else {
                               return SizedBox.shrink();
                             }
+                          } else {
+                            if (filteredCommunityBlogs.isEmpty) {
+                              return Container(
+                                  child:
+                                      Center(child: Text('EmptyScreen')));
+                            } else {
+                              if (communityBlogs[index]
+                                          .blogCategory
+                                          .toLowerCase() ==
+                                      _selectedBlogCategoriesItem[
+                                              'categoryName']
+                                          .toString()
+                                          .toLowerCase() ||
+                                  _selectedBlogCategoriesItem[
+                                              'categoryName']
+                                          .toString()
+                                          .toLowerCase() ==
+                                      'all') {
+                                return CommunityBlogs(
+                                  selectedBlog:
+                                      filteredCommunityBlogs[index],
+                                );
+                              } else {
+                                return SizedBox.shrink();
+                              }
+                            }
                           }
-                        }
-                      },
-                    ),
-            ),
+                        },
+                      ),
+            ), //<-- Display
           ],
         ),
       ),
@@ -284,25 +335,60 @@ class _CommunityBlogsState extends State<CommunityBlogs> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-      child: Material(
-        borderRadius: BorderRadius.circular(10),
-        elevation: 5,
-        child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-          width: double.infinity,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15),
+              spreadRadius: 0,
+              blurRadius: 10,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        width: double.infinity,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(
                   'https://static.wixstatic.com/media/ec9816_120f89a1570549e882031fbfb5ee5905~mv2.png/v1/fill/w_600,h_450,al_c,q_95/Design%20Sprint%20-%20Design%20Thinking%20-%20Graphi.webp',
                   height: 100,
                   fit: BoxFit.fill),
-              Text(selectedBlog.blogName),
-              Text(selectedBlog.blogDescription),
-              Text('by:${selectedBlog.blogAuthor}'),
-              Row(children: [
-                Icon(Icons.remove_red_eye_outlined),
-                Text(selectedBlog.blogViews.toString())
-              ]),
+              Text(
+                selectedBlog.blogName,
+                style: blackBoldText18,
+              ),
+              verticalSpace(height: 8),
+              Text(
+                selectedBlog.blogDescription,
+                style: grayRegular14,
+              ),
+              verticalSpace(height: 8),
+              Row(
+                children: [
+                  Text(
+                    'By: ${selectedBlog.blogAuthor}',
+                    style: grayRegular12,
+                  ),
+                  Spacer(),
+                  Row(children: [
+                    Icon(
+                      Icons.remove_red_eye_outlined,
+                      color: Color(0xff888888),
+                      size: 18,
+                    ),
+                    horizontalSpace(width: 6),
+                    Text(
+                      selectedBlog.blogViews.toString(),
+                      style: grayRegular12,
+                    )
+                  ]),
+                ],
+              ),
             ],
           ),
         ),
@@ -316,6 +402,20 @@ class NotFound extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Center(child: Text('Sorry')),);
+    return Container(
+      padding: EdgeInsets.all(20),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text(
+              'Sorry! We didn’t find what you are looking for',
+              style: accentRegular22,
+              textAlign: TextAlign.center,
+            ),
+            Image.asset("assets/images/undraw_Tree_swing_646s 2.png"),
+          ],
+        ),
+      ),
+    );
   }
 }
