@@ -37,6 +37,9 @@ final accentRegular14 = TextStyle(fontSize: 14, color: purpleAccent, fontWeight:
 final grayRegular14 = TextStyle(fontSize: 14, color: Color(0xff707070), fontWeight: FontWeight.w400);
 final grayRegular12 = TextStyle(fontSize: 12, color: Color(0xff707070), fontWeight: FontWeight.w400);
 
+final whiteLight16 = TextStyle(fontSize: 16, color: whitee, fontWeight: FontWeight.w300);
+final whitePLACEHOLDER14 = TextStyle(fontSize: 14, color: Color(0xffbcbcbc), fontWeight: FontWeight.w400);
+
 
 Widget verticalSpace({required double height}) {
   return SizedBox(height: height);

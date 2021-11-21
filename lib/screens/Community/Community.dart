@@ -7,6 +7,8 @@ import '../colors.dart';
 import '../typography.dart';
 import 'BlogScreen.dart';
 
+import 'package:flutter_svg/flutter_svg.dart';
+
 class Community extends StatefulWidget {
   const Community({Key? key}) : super(key: key);
 
@@ -15,6 +17,7 @@ class Community extends StatefulWidget {
 }
 
 class _CommunityState extends State<Community> {
+
   bool categoryIsSelected = false;
   List<dynamic> blogCategoriesList = [
     {'categoryName': 'All', 'categoryIsSelected': true},
@@ -107,66 +110,85 @@ class _CommunityState extends State<Community> {
     // print(filteredCommunityBlogs.length);
     // print(communityBlogs.length);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: GlobalAppBar('Community', true),
       body: SafeArea(
         child: Column(
           children: [
-            Material(
-              elevation: 1,
-              borderRadius: BorderRadius.circular(4),
-              child: Container(
-                // height: 130,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: purpleAccent,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Hey!! Looking for something?',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        height: 44,
-                        margin: EdgeInsets.symmetric(horizontal: 44),
-                        child: TextFormField(
-                          controller: _searchText,
-                          onChanged: (value) {
-                            searchBlogs(value);
-                          },
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: purpleAccent),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: purpleAccent),
-                              ),
-                              isDense: true,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              fillColor: Colors.white,
-                              hintText: 'Enter',
-                              // hintStyle: TextStyle(color: Color(0xffe5e5e5)),
-                              filled: true,
-                              suffixIcon: IconButton(
-                                  icon: Icon(
-                                    Icons.search_sharp,
-                                    size: 22,
-                                    color: Color(0xff888888),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 8),
+              // height: 130,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: purpleAccent,
+              ),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Hey!! Looking for something?',
+                      style: whiteLight16,
+                    ),
+                    verticalSpace(height: 10),
+                    SizedBox(
+                      height: 40,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 6,
+                            child: TextFormField(
+                              controller: _searchText,
+                              onChanged: (value) {
+                                searchBlogs(value);
+                              },
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: purpleAccent),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: purpleAccent),
+                                ),
+                                isDense: true,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                fillColor: Colors.white,
+                                hintText: 'Enter',
+                                hintStyle: whitePLACEHOLDER14,
+                                // hintStyle: TextStyle(color: Color(0xffe5e5e5)),
+                                filled: true,
+                                suffixIcon: Padding(
+                                  padding: const EdgeInsets.all(12),
+                                  child: SvgPicture.asset(
+                                    'assets/icons/Community_Search.svg',
+                                    height: 10,
+                                    width: 10,
+                                    color: Color(0xffB8BBFF),
                                   ),
-                                  onPressed: () {
-                                    searchBlogs(_searchText.text);
-                                  })),
-                        ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          horizontalSpace(width: 10),
+                          // Expanded(
+                          //   flex: 1,
+                          //   child: InkWell(
+                          //     onTap: () {},
+                          //     child: FittedBox(
+                          //       child: SvgPicture.asset(
+                          //         'assets/icons/COMMUNITY_FAVOURITES_BLANK.svg',
+                          //       ),
+                          //     ),
+                          //   ),
+                          // )
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ), //<-- Searching
@@ -233,52 +255,14 @@ class _CommunityState extends State<Community> {
                           filteredCommunityBlogs.isEmpty)
                       ? NotFound()
                       : ListView.builder(
-                        itemCount: (_searchText.text.isEmpty)
-                            ? communityBlogs.length
-                            : filteredCommunityBlogs.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (_searchText.text.isEmpty) {
-                            // print('here');
-                            // print(communityBlogs[index].blogCategory.toLowerCase());
-                            // print(_selectedBlogCategoriesItem['categoryName'].toString().toLowerCase());
-                            if (communityBlogs[index]
-                                        .blogCategory
-                                        .toLowerCase() ==
-                                    _selectedBlogCategoriesItem[
-                                            'categoryName']
-                                        .toString()
-                                        .toLowerCase() ||
-                                _selectedBlogCategoriesItem['categoryName']
-                                        .toString()
-                                        .toLowerCase() ==
-                                    'all') {
-                              // print('here1');
-                              return InkWell(
-                                onTap: () {
-                                  print(communityBlogs[index].blogName);
-                                  Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => BlogScreen(blogName: communityBlogs[index].blogName,
-                                        blogDesc: communityBlogs[index].blogDescription,
-                                        blogAuthor: communityBlogs[index].blogAuthor,
-                                        blogViews: communityBlogs[index].blogViews,),
-                                  ),
-                                );
-                                },
-                                child: CommunityBlogs(
-                                  selectedBlog: communityBlogs[index],
-                                ),
-                              );
-                            } else {
-                              return SizedBox.shrink();
-                            }
-                          } else {
-                            if (filteredCommunityBlogs.isEmpty) {
-                              return Container(
-                                  child:
-                                      Center(child: Text('EmptyScreen')));
-                            } else {
+                          itemCount: (_searchText.text.isEmpty)
+                              ? communityBlogs.length
+                              : filteredCommunityBlogs.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            if (_searchText.text.isEmpty) {
+                              // print('here');
+                              // print(communityBlogs[index].blogCategory.toLowerCase());
+                              // print(_selectedBlogCategoriesItem['categoryName'].toString().toLowerCase());
                               if (communityBlogs[index]
                                           .blogCategory
                                           .toLowerCase() ==
@@ -286,22 +270,63 @@ class _CommunityState extends State<Community> {
                                               'categoryName']
                                           .toString()
                                           .toLowerCase() ||
-                                  _selectedBlogCategoriesItem[
-                                              'categoryName']
+                                  _selectedBlogCategoriesItem['categoryName']
                                           .toString()
                                           .toLowerCase() ==
                                       'all') {
-                                return CommunityBlogs(
-                                  selectedBlog:
-                                      filteredCommunityBlogs[index],
+                                // print('here1');
+                                return InkWell(
+                                  onTap: () {
+                                    print(communityBlogs[index].blogName);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => BlogScreen(
+                                          blogName:
+                                              communityBlogs[index].blogName,
+                                          blogDesc: communityBlogs[index]
+                                              .blogDescription,
+                                          blogAuthor:
+                                              communityBlogs[index].blogAuthor,
+                                          blogViews:
+                                              communityBlogs[index].blogViews, communityBlogs: communityBlogs[index],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: CommunityBlogs(
+                                    selectedBlog: communityBlogs[index],
+                                  ),
                                 );
                               } else {
                                 return SizedBox.shrink();
                               }
+                            } else {
+                              if (filteredCommunityBlogs.isEmpty) {
+                                return Container(
+                                    child: Center(child: Text('EmptyScreen')));
+                              } else {
+                                if (communityBlogs[index]
+                                            .blogCategory
+                                            .toLowerCase() ==
+                                        _selectedBlogCategoriesItem[
+                                                'categoryName']
+                                            .toString()
+                                            .toLowerCase() ||
+                                    _selectedBlogCategoriesItem['categoryName']
+                                            .toString()
+                                            .toLowerCase() ==
+                                        'all') {
+                                  return CommunityBlogs(
+                                    selectedBlog: filteredCommunityBlogs[index],
+                                  );
+                                } else {
+                                  return SizedBox.shrink();
+                                }
+                              }
                             }
-                          }
-                        },
-                      ),
+                          },
+                        ),
             ), //<-- Display
           ],
         ),
@@ -321,6 +346,8 @@ class CommunityBlogs extends StatefulWidget {
 }
 
 class _CommunityBlogsState extends State<CommunityBlogs> {
+  bool favIsSelected = true;
+
   late CommunityModel selectedBlog;
 
   _CommunityBlogsState({required this.selectedBlog});
@@ -349,48 +376,65 @@ class _CommunityBlogsState extends State<CommunityBlogs> {
           ],
         ),
         width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.network(
-                  'https://static.wixstatic.com/media/ec9816_120f89a1570549e882031fbfb5ee5905~mv2.png/v1/fill/w_600,h_450,al_c,q_95/Design%20Sprint%20-%20Design%20Thinking%20-%20Graphi.webp',
-                  height: 100,
-                  fit: BoxFit.fill),
-              Text(
-                selectedBlog.blogName,
-                style: blackBoldText18,
-              ),
-              verticalSpace(height: 8),
-              Text(
-                selectedBlog.blogDescription,
-                style: grayRegular14,
-              ),
-              verticalSpace(height: 8),
-              Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                  'https://images.pexels.com/photos/6867728/pexels-photo-6867728.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+                  height: 115,
+                  width: double.infinity,
+                  fit: BoxFit.none),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'By: ${selectedBlog.blogAuthor}',
-                    style: grayRegular12,
+                    selectedBlog.blogName,
+                    style: blackBoldText18,
                   ),
-                  Spacer(),
-                  Row(children: [
-                    Icon(
-                      Icons.remove_red_eye_outlined,
-                      color: Color(0xff888888),
-                      size: 18,
-                    ),
-                    horizontalSpace(width: 6),
-                    Text(
-                      selectedBlog.blogViews.toString(),
-                      style: grayRegular12,
-                    )
-                  ]),
+                  verticalSpace(height: 8),
+                  Text(
+                    selectedBlog.blogDescription,
+                    style: grayRegular14,
+                  ),
+                  verticalSpace(height: 8),
+                  Row(
+                    children: [
+                      Text(
+                        'By: ${selectedBlog.blogAuthor}',
+                        style: grayRegular12,
+                      ),
+                      Spacer(),
+                      Row(children: [
+                        IconButton(
+                          icon: SvgPicture.asset(favIsSelected ? 'assets/icons/FAV_OUTLINED.svg': 'assets/icons/FAV_FILLED.svg'),
+                          onPressed: () {
+                            setState(() {
+                              favIsSelected = !favIsSelected;
+                            });
+                          },
+                        ),
+                        Icon(
+                          Icons.remove_red_eye_outlined,
+                          color: Color(0xff888888),
+                          size: 18,
+                        ),
+                        horizontalSpace(width: 6),
+                        Text(
+                          selectedBlog.blogViews.toString(),
+                          style: grayRegular12,
+                        )
+                      ]),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

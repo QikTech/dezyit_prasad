@@ -1,20 +1,28 @@
 import 'package:dezyit_prasad/models/CommunityModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../GlobalAppBar.dart';
 import '../colors.dart';
 import '../typography.dart';
 
+import 'package:flutter_svg/flutter_svg.dart';
+
 class BlogScreen extends StatelessWidget {
   // late List<dynamic> filteredCommunityBlogs = [];
   final String blogName, blogDesc, blogAuthor;
   final double blogViews;
+  final CommunityModel communityBlogs;
 
   BlogScreen(
-      {required this.blogName,
+      {
+        required this.blogName,
       required this.blogDesc,
       required this.blogAuthor,
-      required this.blogViews});
+      required this.blogViews,
+        required this.communityBlogs,
+
+      });
 
   // BlogScreen({required this.filteredCommunityBlogs});
 
@@ -35,7 +43,7 @@ class BlogScreen extends StatelessWidget {
               ),
             ],
           ),
-          width: double.infinity,
+          width: MediaQuery.of(context).size.width,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
@@ -77,7 +85,7 @@ class BlogScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                    Spacer(),
+                    // Spacer(),
                     MaterialButton(
                       shape: RoundedRectangleBorder(
                         side: BorderSide(color: purpleAccent),
@@ -124,18 +132,17 @@ class BlogScreen extends StatelessWidget {
                     ]),
                   ],
                 ),
-                Expanded(
-                    child: Row(
-                      children: [
-                        CommentBox(),
-                        IconButton(
-                            icon: ImageIcon(AssetImage('assets/icons/SendComment.png'),),
-                            onPressed: () {
-                              debugPrint('222');
-                              print('_commentText.text');
-                            }),
+                Row(
+                  children: [
+                    Expanded(child: CommentBox()),
+                    IconButton(
+                        icon: ImageIcon(AssetImage('assets/icons/SendComment.png'),),
+                        onPressed: () {
+                          debugPrint('222');
+                          print('_commentText.text');
+                        }),
               ],
-                    )),
+                ),
               ],
             ),
           ),
@@ -150,21 +157,19 @@ class CommentBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 26,
-      child: TextFormField(
-        controller: _commentText,
-        onChanged: (value) => _commentText.text,
-        decoration: InputDecoration(
-          isDense: true,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          fillColor: Colors.white,
-          hintText: 'Reply',
-          // hintStyle: TextStyle(color: Color(0xffe5e5e5)),
-          filled: true,
+    return TextFormField(
+      controller: _commentText,
+      onChanged: (value) => _commentText.text,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 10,horizontal: 14),
+        isDense: true,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
         ),
+        fillColor: Colors.white,
+        hintText: 'Reply',
+        // hintStyle: TextStyle(color: Color(0xffe5e5e5)),
+        filled: true,
       ),
     );
   }
