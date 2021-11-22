@@ -33,9 +33,11 @@ final blackRegular12 = TextStyle(fontSize: 12, color: Colors.black, fontWeight: 
 
 final accentRegular12 = TextStyle(fontSize: 12, color: purpleAccent, fontWeight: FontWeight.w400);
 final accentRegular14 = TextStyle(fontSize: 14, color: purpleAccent, fontWeight: FontWeight.w400);
+final grayMedium14 = TextStyle(fontSize: 14, color: Color(0xff333333), fontWeight: FontWeight.w500);
 
 final grayRegular14 = TextStyle(fontSize: 14, color: Color(0xff707070), fontWeight: FontWeight.w400);
 final grayRegular12 = TextStyle(fontSize: 12, color: Color(0xff707070), fontWeight: FontWeight.w400);
+final gray2Regular12 = TextStyle(fontSize: 12, color: Color(0xffA8A8A8), fontWeight: FontWeight.w400);
 
 final whiteLight16 = TextStyle(fontSize: 16, color: whitee, fontWeight: FontWeight.w300);
 final whitePLACEHOLDER14 = TextStyle(fontSize: 14, color: Color(0xffbcbcbc), fontWeight: FontWeight.w400);

@@ -201,6 +201,7 @@ class _CommunityState extends State<Community> {
                   return Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: InkWell(
+                      splashColor: purpleAccent,
                       onTap: () =>
                           setState(() => _selectedBlogCategoriesItem = item),
                       child: IntrinsicWidth(
@@ -217,7 +218,9 @@ class _CommunityState extends State<Community> {
                                       0, 3), // changes position of shadow
                                 ),
                               ],
-                              color: Colors.white,
+                              color: _selectedBlogCategoriesItem == item
+                                  ? Color(0xffF3F4FF)
+                                  : Colors.white,
                               border: Border.all(
                                 color: _selectedBlogCategoriesItem == item
                                     ? purpleAccent
@@ -229,10 +232,12 @@ class _CommunityState extends State<Community> {
                                   BorderRadius.all(Radius.circular(4))),
                           child: Center(
                             child: Text(
-                              '#${item['categoryName']}',
+                              '${item['categoryName']}',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Color(0xff707070),
+                                color: _selectedBlogCategoriesItem == item
+                                    ? purpleAccent
+                                    : Color(0xff707070),
                                 fontSize: 14,
                               ),
                             ),
@@ -410,13 +415,14 @@ class _CommunityBlogsState extends State<CommunityBlogs> {
                       ),
                       Spacer(),
                       Row(children: [
-                        IconButton(
-                          icon: SvgPicture.asset(favIsSelected ? 'assets/icons/FAV_OUTLINED.svg': 'assets/icons/FAV_FILLED.svg'),
-                          onPressed: () {
-                            setState(() {
-                              favIsSelected = !favIsSelected;
-                            });
-                          },
+                        InkWell(
+                          child: SvgPicture.asset(favIsSelected ? 'assets/icons/FAV_OUTLINED.svg': 'assets/icons/FAV_FILLED.svg'),
+                            onTap: () {
+                              setState(() {
+                                favIsSelected = !favIsSelected;
+                              });
+                            },
+
                         ),
                         Icon(
                           Icons.remove_red_eye_outlined,
