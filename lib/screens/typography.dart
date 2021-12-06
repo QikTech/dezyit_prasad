@@ -33,13 +33,22 @@ final blackRegular12 = TextStyle(fontSize: 12, color: Colors.black, fontWeight: 
 
 final accentRegular12 = TextStyle(fontSize: 12, color: purpleAccent, fontWeight: FontWeight.w400);
 final accentRegular14 = TextStyle(fontSize: 14, color: purpleAccent, fontWeight: FontWeight.w400);
+final accentRegular16 = TextStyle(fontSize: 16, color: purpleAccent, fontWeight: FontWeight.w400);
 final grayMedium14 = TextStyle(fontSize: 14, color: Color(0xff333333), fontWeight: FontWeight.w500);
+
+final gray33Regular20 = TextStyle(fontSize: 20, color: Color(0xff333333), fontWeight: FontWeight.w400);
+final gray66Regular14 = TextStyle(fontSize: 14, color: Color(0xff666666), fontWeight: FontWeight.w400);
+final gray33Regular14 = TextStyle(fontSize: 14, color: Color(0xff666666), fontWeight: FontWeight.w400);
+final gray66Regular16 = TextStyle(fontSize: 16, color: Color(0xff666666), fontWeight: FontWeight.w400);
+final gray33Regular16 = TextStyle(fontSize: 16, color: Color(0xff333333), fontWeight: FontWeight.w400);
+
 
 final grayRegular14 = TextStyle(fontSize: 14, color: Color(0xff707070), fontWeight: FontWeight.w400);
 final grayRegular12 = TextStyle(fontSize: 12, color: Color(0xff707070), fontWeight: FontWeight.w400);
 final gray2Regular12 = TextStyle(fontSize: 12, color: Color(0xffA8A8A8), fontWeight: FontWeight.w400);
 
 final whiteLight16 = TextStyle(fontSize: 16, color: whitee, fontWeight: FontWeight.w300);
+final whiteRegular16 = TextStyle(fontSize: 16, color: whitee, fontWeight: FontWeight.w400);
 final whitePLACEHOLDER14 = TextStyle(fontSize: 14, color: Color(0xffbcbcbc), fontWeight: FontWeight.w400);
 
 
@@ -70,3 +79,10 @@ class HorizontalSpace extends StatelessWidget {
     return SizedBox(width: _size);
   }
 }
+
+final dezyShadow = BoxShadow(
+color: Colors.black.withOpacity(0.15),
+spreadRadius: 0,
+blurRadius: 10,
+offset: Offset(0, 3), // changes position of shadow
+);
