@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../GlobalAppBar.dart';
 import '../colors.dart';
 
+import '../typography.dart';
 import 'PlansAndPricing.dart';
 
 class Checkout extends StatefulWidget {
@@ -36,74 +37,94 @@ class _CheckoutState extends State<Checkout> {
           child: Column(
             //FIRST COLUMN ##########################
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  color: Color(0xff74838C),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    boxShadow: [dezyShadow],
+                  ),
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '$counter Members',
-                                style:
-                                    TextStyle(fontSize: 18, color: Colors.white),
-                              ),
-                              Text(
-                                '₹19 x $counter Licence x 1 month',
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.white),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            '₹${counter*19}',
-                            style: TextStyle(fontSize: 18, color: Colors.white),
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.all(18),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Details',
+                                      style: TextStyle(
+                                          color: purpleAccent,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    Text(
+                                      '$counter Members',
+                                      style:
+                                          TextStyle(fontSize: 18, color: Colors.black),
+                                    ),
+                                    Text(
+                                      '₹19 x $counter Licence x 1 month',
+                                      style:
+                                          TextStyle(fontSize: 12, color: Color(0xffc2c2c2)),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  '₹${counter*19}',
+                                  style: TextStyle(fontSize: 14, color: purpleAccent),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '${pm!.packageName} Charges',
+                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                ),
+                                Text(
+                                  '₹${pm!.amount}',
+                                  style: TextStyle(fontSize: 14, color: purpleAccent),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            // Divider(
+                            //   color: purpleAccent,
+                            // ),
+                          ],
+                        ),
                       ),
-                      SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '${pm!.packageName} Charge',
-                            style: TextStyle(fontSize: 18, color: Colors.white),
-                          ),
-                          Text(
-                            '₹${pm!.amount}',
-                            style: TextStyle(fontSize: 18, color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      Divider(
-                        color: Colors.white,
-                      ),
-                      SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Total',
-                            style: TextStyle(fontSize: 18, color: Colors.white),
-                          ),
-                          Text(
-                            '₹${19*counter+pm!.amount}',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w900),
-                          ),
-                        ],
+                      Container(
+                        padding: EdgeInsetsDirectional.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color(0x26787CD1),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Total Payable (Inc. of all Taxes)',
+                              style: TextStyle(fontSize: 18, color: Colors.black),
+                            ),
+                            Text(
+                              '₹${19*counter+pm!.amount}',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: purpleAccent,
+                                  fontWeight: FontWeight.w900),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -113,7 +134,7 @@ class _CheckoutState extends State<Checkout> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   //SECOND COLUMN ##########################
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
                       height: 15,
@@ -121,7 +142,7 @@ class _CheckoutState extends State<Checkout> {
                     Text('Checkout',
                         style: TextStyle(
                             fontSize: 20,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w400,
                             color: Colors.black)),
                     SizedBox(
                       height: 15,
@@ -295,7 +316,7 @@ class _CheckoutState extends State<Checkout> {
                   },
                   color: purpleAccent,
                   child: Text(
-                    'Checkout',
+                    'Pay',
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w400,

@@ -1,6 +1,8 @@
 import 'package:dezyit_prasad/screens/MicroServices/MicroServices.dart';
 import 'package:dezyit_prasad/screens/PaymentPortal/PaymentResult.dart';
 import 'package:dezyit_prasad/screens/PaymentPortal/PlansAndPricing.dart';
+import 'package:dezyit_prasad/screens/Sharing%20Module/share.dart';
+import 'package:dezyit_prasad/screens/Timeline/timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:dezyit_prasad/models/packageModel.dart';
 import 'package:dezyit_prasad/screens/PaymentPortal/checkout.dart';
@@ -62,7 +64,7 @@ class _ModulesListState extends State<ModulesList> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PaymentResult(),
+                          builder: (context) => Share(),
                         ),
                       );
                     }
@@ -71,6 +73,14 @@ class _ModulesListState extends State<ModulesList> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => MicroServices(),
+                        ),
+                      );
+                    }
+                    if (index == 3) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Timeline(),
                         ),
                       );
                     }

@@ -17,7 +17,6 @@ class Community extends StatefulWidget {
 }
 
 class _CommunityState extends State<Community> {
-
   bool categoryIsSelected = false;
   List<dynamic> blogCategoriesList = [
     {'categoryName': 'All', 'categoryIsSelected': true},
@@ -34,6 +33,8 @@ class _CommunityState extends State<Community> {
   late List<CommunityModel> communityBlogs = [];
   late List<CommunityModel> filteredCommunityBlogs = [];
   final _searchText = TextEditingController();
+  final _newBlogText = TextEditingController();
+
   bool isLoading = false;
 
   searchBlogs(String keyword) {
@@ -116,6 +117,7 @@ class _CommunityState extends State<Community> {
         child: Column(
           children: [
             Container(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               margin: EdgeInsets.symmetric(horizontal: 8),
               // height: 130,
               width: double.infinity,
@@ -123,75 +125,130 @@ class _CommunityState extends State<Community> {
                 borderRadius: BorderRadius.circular(12),
                 color: purpleAccent,
               ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Hey!! Looking for something?',
-                      style: whiteLight16,
-                    ),
-                    verticalSpace(height: 10),
-                    SizedBox(
-                      height: 40,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 6,
-                            child: TextFormField(
-                              controller: _searchText,
-                              onChanged: (value) {
-                                searchBlogs(value);
-                              },
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: purpleAccent),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: purpleAccent),
-                                ),
-                                isDense: true,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                fillColor: Colors.white,
-                                hintText: 'Enter',
-                                hintStyle: whitePLACEHOLDER14,
-                                // hintStyle: TextStyle(color: Color(0xffe5e5e5)),
-                                filled: true,
-                                suffixIcon: Padding(
-                                  padding: const EdgeInsets.all(12),
-                                  child: SvgPicture.asset(
-                                    'assets/icons/Community_Search.svg',
-                                    height: 10,
-                                    width: 10,
-                                    color: Color(0xffB8BBFF),
-                                  ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Hey!! Looking for something?',
+                    style: whiteLight16,
+                  ),
+                  verticalSpace(height: 10),
+                  SizedBox(
+                    height: 40,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 6,
+                          child: TextFormField(
+                            controller: _searchText,
+                            onChanged: (value) {
+                              searchBlogs(value);
+                            },
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: purpleAccent),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: purpleAccent),
+                              ),
+                              isDense: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              fillColor: Colors.white,
+                              hintText: 'Enter',
+                              hintStyle: whitePLACEHOLDER14,
+                              // hintStyle: TextStyle(color: Color(0xffe5e5e5)),
+                              filled: true,
+                              suffixIcon: Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: SvgPicture.asset(
+                                  'assets/icons/Community_Search.svg',
+                                  height: 10,
+                                  width: 10,
+                                  color: Color(0xffB8BBFF),
                                 ),
                               ),
                             ),
                           ),
-                          horizontalSpace(width: 10),
-                          // Expanded(
-                          //   flex: 1,
-                          //   child: InkWell(
-                          //     onTap: () {},
-                          //     child: FittedBox(
-                          //       child: SvgPicture.asset(
-                          //         'assets/icons/COMMUNITY_FAVOURITES_BLANK.svg',
-                          //       ),
-                          //     ),
-                          //   ),
-                          // )
-                        ],
-                      ),
+                        ),
+                        horizontalSpace(width: 10),
+                        InkWell(
+                          onTap: (){},
+                          splashColor: purpleAccent,
+                          child: SvgPicture.asset(
+                            'assets/icons/COMMUNITY FAVOURITES OUTLINED.svg',
+                            height: 40,
+                            width: 40,
+                            color: Color(0xffB8BBFF),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ), //<-- Searching
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 9),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [dezyShadow]),
+              child: Material(
+                color: Colors.transparent,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundColor: purpleAccent,
+                      ),
+                      horizontalSpace(width: 8),
+                      Expanded(
+                        child: Container(
+                          height: 42,
+                          child: TextFormField(
+                            controller: _newBlogText,
+                            onChanged: (value) { },
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: purpleAccent),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: purpleAccent),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              isDense: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              fillColor: Colors.white,
+                              hintText: 'New Post',
+                              hintStyle: whitePLACEHOLDER14,
+                              filled: true,
+                            ),
+                          ),
+                        ),
+                      ),
+                      horizontalSpace(width: 8),
+                      InkWell(
+                        borderRadius: BorderRadius.circular(4),
+                        onTap: () {
+                          print(_newBlogText.text);
+                          _newBlogText.clear();
+                        },
+                        splashColor: purpleAccent,
+                        child: SvgPicture.asset('assets/icons/ADD BLOG.svg'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ), //<-- ADD BLOG
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Wrap(
@@ -294,7 +351,8 @@ class _CommunityState extends State<Community> {
                                           blogAuthor:
                                               communityBlogs[index].blogAuthor,
                                           blogViews:
-                                              communityBlogs[index].blogViews, communityBlogs: communityBlogs[index],
+                                              communityBlogs[index].blogViews,
+                                          communityBlogs: communityBlogs[index],
                                         ),
                                       ),
                                     );
@@ -416,13 +474,14 @@ class _CommunityBlogsState extends State<CommunityBlogs> {
                       Spacer(),
                       Row(children: [
                         InkWell(
-                          child: SvgPicture.asset(favIsSelected ? 'assets/icons/FAV_OUTLINED.svg': 'assets/icons/FAV_FILLED.svg'),
-                            onTap: () {
-                              setState(() {
-                                favIsSelected = !favIsSelected;
-                              });
-                            },
-
+                          child: SvgPicture.asset(favIsSelected
+                              ? 'assets/icons/FAV_OUTLINED.svg'
+                              : 'assets/icons/FAV_FILLED.svg'),
+                          onTap: () {
+                            setState(() {
+                              favIsSelected = !favIsSelected;
+                            });
+                          },
                         ),
                         Icon(
                           Icons.remove_red_eye_outlined,

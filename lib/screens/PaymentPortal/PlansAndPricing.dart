@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dezyit_prasad/models/packageModel.dart';
 import 'package:dezyit_prasad/screens/PaymentPortal/checkout.dart';
+import 'package:dezyit_prasad/screens/typography.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../GlobalAppBar.dart';
 import '../colors.dart';
@@ -225,27 +227,27 @@ class _PlansAndPricing_2State extends State<PlansAndPricing_2> {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      decoration: BoxDecoration(border: Border.all(color: grayy)),
+      // decoration: BoxDecoration(border: Border.all(color: grayy)),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
         child: Column(
           // MAIN COLUMN ####################################################
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Professional Plan',
               style: TextStyle(
-                  color: Colors.black,
+                  color: purpleAccent,
                   fontSize: 18,
-                  fontWeight: FontWeight.w700),
+                  fontWeight: FontWeight.w400),
             ),
             SizedBox(
               height: 10,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   for (var p in packages)
                     Stack(
@@ -257,33 +259,36 @@ class _PlansAndPricing_2State extends State<PlansAndPricing_2> {
                             setState(() {});
                           },
                           child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 8),
                             // width: size.width * 0.23,
                             // height: size.height * 0.06,
-                            width: 115,
-                            height: 50,
+                            width: size.width*0.8,
+                            height: 100,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                width: 2,
+                                width: 1,
                                 color: selectedPackage == p
                                     ? purpleAccent
-                                    : Color(0xffA59292),
+                                    : purpleAccent,
                               ),
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
+                              color: selectedPackage == p
+                                  ? purpleAccent
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(12),
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 4),
+                                  padding: const EdgeInsets.symmetric(horizontal: 14),
                                   child: selectedPackage == p
                                       ? Stack(
                                           children: [
                                             Icon(
                                               Icons.circle_outlined,
-                                              color: purpleAccent,
-                                              size: 18,
+                                              color: Colors.white,
+                                              size: 24,
                                             ),
                                             Positioned(
                                               right: 1,
@@ -293,7 +298,7 @@ class _PlansAndPricing_2State extends State<PlansAndPricing_2> {
                                               child: Icon(
                                                 Icons.circle,
                                                 color: Colors.white,
-                                                size: 14,
+                                                size: 4,
                                               ),
                                             ),
                                             Positioned(
@@ -302,64 +307,65 @@ class _PlansAndPricing_2State extends State<PlansAndPricing_2> {
                                               top: 1,
                                               bottom: 1,
                                               child: Icon(Icons.circle,
-                                                  color: purpleAccent,
-                                                  size: 11),
+                                                  color: Colors.white,
+                                                  size: 12),
                                             ),
                                           ],
                                         )
                                       : Icon(Icons.circle_outlined,
-                                          color: purpleAccent, size: 18),
+                                          color: selectedPackage == p
+                                              ? Colors.white
+                                              : purpleAccent, size: 24),
                                 ),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${p.packageName}',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12,
+                                Text(
+                                  '${p.packageName}',
+                                  style: TextStyle(
+                                    color: selectedPackage == p
+                                        ? Colors.white
+                                        :  purpleAccent,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                HorizontalSpace(10),
+                                Image(
+                                  image: AssetImage(selectedPackage == p
+                                      ? 'assets/icons/Divider Line White.png' : 'assets/icons/Divider Line Purple.png',
                                       ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        if (p.discount != 0)
-                                          Text(
-                                            '₹${p.discount.round()}',
-                                            style: TextStyle(
-                                              color: Color(0xff929292),
-                                              decoration:
-                                                  TextDecoration.lineThrough,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        SizedBox(
-                                          width: 4,
-                                        ),
-                                        Text(
-                                          '₹${p.amount}',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                  height: 45,
                                 ),
+                                HorizontalSpace(10),
+                                Text(
+                                  '₹${p.amount.round()}',
+                                  style: TextStyle(
+                                    color: selectedPackage == p
+                                        ? Colors.white
+                                        :  purpleAccent,
+                                    fontSize: 32,
+                                  ),
+                                ),
+                                if (p.discount != 0)
+                                  Text(
+                                    '₹${p.discount.round()}',
+                                    style: TextStyle(
+                                      color: selectedPackage == p
+                                          ? Colors.white
+                                          :  purpleAccent,
+                                      decoration:
+                                      TextDecoration.lineThrough,
+                                      fontSize: 10,
+                                    ),
+                                  ),
                               ],
                             ),
                           ),
                         ),
                         if (p.discount != 0)
                           Positioned(
-                            right: -10,
-                            top: -10,
-                            child: Container(
-                              height: 20,
-                              width: 50,
-                              color: grayy,
+                            right: 10,
+                            top: 0,
+                            child: Image(
+                              image: AssetImage('assets/icons/Offer Pink.png'),
+                              height: 45,
                             ),
                           ),
                       ],
@@ -370,165 +376,198 @@ class _PlansAndPricing_2State extends State<PlansAndPricing_2> {
             SizedBox(
               height: 10,
             ),
-            Divider(
-              indent: 20,
-              endIndent: 20,
-              color: Color(0xff74838C),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            height: 30,
-                            width: 100,
-                            child: Row(
+            // Divider(
+            //   indent: 20,
+            //   endIndent: 20,
+            //   color: Color(0xff74838C),
+            // ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+                boxShadow: [dezyShadow],
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.all(18),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Details',
+                          style: TextStyle(
+                              color: purpleAccent,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                InkWell(
-                                  onTap: () {
-                                    if (counter > 1) {
-                                      counter--;
-                                      setState(() {});
-                                    }
-                                  },
-                                  child: Container(
-                                    width: 30,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      color: purpleAccent,
-                                      borderRadius: BorderRadius.horizontal(
-                                        left: Radius.circular(3),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20,bottom: 8),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Members',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.black),
                                       ),
-                                    ),
-                                    child: Icon(
-                                      Icons.remove,
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
+                                      SizedBox(width: 20),
+                                      SizedBox(
+                                        height: 30,
+                                        width: 100,
+                                        child: Row(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                if (counter > 1) {
+                                                  counter--;
+                                                  setState(() {});
+                                                }
+                                              },
+                                              child: Container(
+                                                width: 30,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  color: purpleAccent,
+                                                  borderRadius: BorderRadius.horizontal(
+                                                    left: Radius.circular(3),
+                                                  ),
+                                                ),
+                                                child: Icon(
+                                                  Icons.remove,
+                                                  color: Colors.white,
+                                                  size: 16,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 40,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xffEEEEF1),
+                                                borderRadius: BorderRadius.horizontal(),
+                                              ),
+                                              child: Center(
+                                                  child: Text(
+                                                '$counter',
+                                                style: TextStyle(fontSize: 12),
+                                              )),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                counter++;
+                                                setState(() {});
+                                              },
+                                              child: Container(
+                                                width: 30,
+                                                height: 30,
+                                                decoration: BoxDecoration(
+                                                  color: purpleAccent,
+                                                  borderRadius: BorderRadius.horizontal(
+                                                    right: Radius.circular(3),
+                                                  ),
+                                                ),
+                                                child: Icon(
+                                                  Icons.add,
+                                                  color: Colors.white,
+                                                  size: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Container(
-                                  width: 40,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffEEEEF1),
-                                    borderRadius: BorderRadius.horizontal(),
-                                  ),
-                                  child: Center(
-                                      child: Text(
-                                    '$counter',
-                                    style: TextStyle(fontSize: 12),
-                                  )),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    counter++;
-                                    setState(() {});
-                                  },
-                                  child: Container(
-                                    width: 30,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      color: purpleAccent,
-                                      borderRadius: BorderRadius.horizontal(
-                                        right: Radius.circular(3),
-                                      ),
-                                    ),
-                                    child: Icon(
-                                      Icons.add,
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
-                                  ),
+                                Text(
+                                  '₹19 x $counter Licence x ${selectedPackage.durationInMonths} month',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0xffc2c2c2)),
                                 ),
                               ],
                             ),
-                          ),
-                          SizedBox(width: 20),
-                          Text(
-                            'Members',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          ),
-                        ],
-                      ),
+                            Text(
+                              '₹${counter * 19}',
+                              // '$counter x ₹${counter * 19}',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: purpleAccent),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${selectedPackage.packageName} Charge',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black),
+                            ),
+                            Text(
+                              '₹${selectedPackage.amount}',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: purpleAccent),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        // Divider(
+                        //   indent: 20,
+                        //   endIndent: 20,
+                        //   color: Color(0xff74838C),
+                        // ),
+                      ],
                     ),
-                    Text(
-                      '₹19 x $counter Licence x ${selectedPackage.durationInMonths} month',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff505657)),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: purpleAccent,
+                      boxShadow: [dezyShadow],
                     ),
-                  ],
-                ),
-                Text(
-                  '₹${counter * 19}',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: purpleAccent),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${selectedPackage.packageName} Charge',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black),
-                ),
-                Text(
-                  '₹${selectedPackage.amount}',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: purpleAccent),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Divider(
-              indent: 20,
-              endIndent: 20,
-              color: Color(0xff74838C),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Total',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black),
-                ),
-                Text(
-                  '₹${(counter * 19) + selectedPackage.amount}',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: purpleAccent),
-                ),
-              ],
+                    padding: EdgeInsetsDirectional.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Total Payable (Inc. of all Taxes)',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          '₹${(counter * 19) + selectedPackage.amount}',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 20,
@@ -553,7 +592,7 @@ class _PlansAndPricing_2State extends State<PlansAndPricing_2> {
                   'Checkout',
                   style: TextStyle(
                       fontSize: 18,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w400,
                       color: Colors.white),
                 ),
               ),
@@ -603,12 +642,12 @@ class PlansAndPricing_3 extends StatelessWidget {
                 SizedBox(height: 20),
                 Padding(
                   // padding: EdgeInsets.symmetric(horizontal: !Responsive.isMobile(context)? 50 :0),
-                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: <Widget>[
                       for (var city in faqList)
                         Container(
-                          width: size.width,
+                          // width: size.width,
                           // width: size.width/2,
                           // if (!Responsive.isMobile(context)) width: 300;
                           margin: const EdgeInsets.only(bottom: 10),
@@ -621,20 +660,21 @@ class PlansAndPricing_3 extends StatelessWidget {
                               children: [
                                 Image(
                                   image: AssetImage('assets/icons/FAQs.png'),
-                                  height: 25,
-                                  width: 25,
+                                  height: 35,
                                 ),
                                 Text(
                                   city,
                                   style: TextStyle(
-                                      fontSize: 12,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w700,
-                                      color: purpleAccent),
+                                      color: purpleAccent,
+                                    overflow: TextOverflow.clip,
+                                  ),
                                 ),
                                 Icon(
-                                  Icons.add,
+                                  Icons.keyboard_arrow_down_outlined,
                                   color: purpleAccent,
-                                  size: 18,
+                                  size: 28,
                                 ),
                               ],
                             ),
