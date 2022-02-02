@@ -113,3 +113,73 @@
 // }
 //
 //
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import 'package:dezyit_prasad/screens/GlobalAppBar.dart';
+// import 'package:flutter/material.dart';
+// import 'package:timelines/timelines.dart';
+//
+//
+// import '../colors.dart';
+//
+// class TimelineModule extends StatefulWidget {
+//
+//   @override
+//   _TimelineModuleState createState() => _TimelineModuleState();
+// }
+//
+// class _TimelineModuleState extends State<TimelineModule> {
+//   @override
+//   Widget build(BuildContext context) {
+//     Size size = MediaQuery.of(context).size;
+//     return Scaffold(
+//       appBar: GlobalAppBar('Timeline', true),
+//       body: Column(
+//         children: [
+//           SizedBox(
+//             width: size.width,
+//             height: size.height*0.2,
+//             child: Timeline.tileBuilder(
+//               scrollDirection: Axis.horizontal,
+//               shrinkWrap: true,
+//               builder: TimelineTileBuilder.fromStyle(
+//                 indicatorStyle: IndicatorStyle.container,
+//                 contentsAlign: ContentsAlign.alternating,
+//                 contentsBuilder: (context, index) => Padding(
+//                   padding: const EdgeInsets.all(8.0),
+//                   child: Text(' $index'),
+//                 ),
+//                 itemCount: 5,
+//               ),
+//             ),
+//           ),
+//           SizedBox(
+//             width: size.width,
+//             height: size.height*0.2,
+//             child: Timeline.builder(
+//               scrollDirection: Axis.horizontal,
+//               itemBuilder: (context, int index){
+//                 return  Padding(
+//                   padding: const EdgeInsets.all(8.0),
+//                   child: Text(' $index'),
+//                 );
+//               }, itemCount: 2,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+//

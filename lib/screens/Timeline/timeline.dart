@@ -1,23 +1,36 @@
 import 'package:dezyit_prasad/screens/GlobalAppBar.dart';
 import 'package:flutter/material.dart';
 
-import 'package:timelines/timelines.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import '../colors.dart';
 
-class Timeline extends StatefulWidget {
+class TimelineModule extends StatefulWidget {
 
   @override
-  _TimelineState createState() => _TimelineState();
+  _TimelineModuleState createState() => _TimelineModuleState();
 }
 
-class _TimelineState extends State<Timeline> {
+class _TimelineModuleState extends State<TimelineModule> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: GlobalAppBar('Timeline', true),
-      body: Material(),
+      body: Container(
+        child: TimelineTile(
+          alignment: TimelineAlign.center,
+          endChild: Container(
+            constraints: const BoxConstraints(
+              minHeight: 120,
+            ),
+            color: Colors.lightGreenAccent,
+          ),
+          startChild: Container(
+            color: Colors.amberAccent,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -80,7 +80,7 @@ class _ModulesListState extends State<ModulesList> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Timeline(),
+                          builder: (context) => TimelineModule(),
                         ),
                       );
                     }
