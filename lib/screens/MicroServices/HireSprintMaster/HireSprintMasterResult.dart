@@ -29,12 +29,8 @@ class HireSprintMasterResult extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HireSprintMasterResult(),
-                    ),
-                  );
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+
                 },
                 color: purpleAccent,
                 child: Text(

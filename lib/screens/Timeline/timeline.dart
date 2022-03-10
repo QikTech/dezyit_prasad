@@ -42,7 +42,7 @@ class _TimelineModuleState extends State<TimelineModule> {
               builder: (context) => TimeLineDialog(),
             );
           },
-          color: Colors.blue,
+          color: purpleAccent,
           child: Text(
             'Change Timeline',
             style: TextStyle(color: Colors.white),
@@ -581,12 +581,8 @@ class _EndDialogState extends State<EndDialog> {
               child: Text('Continue', style: whiteLight16),
               onPressed: () {
                 print('Clicked');
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) =>  EndDialog(),
-                //   ),
-                // );
+                Navigator.of(context).popUntil((route) => route.isFirst);
+
               },
             ),
           ],
