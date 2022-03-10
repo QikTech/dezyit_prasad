@@ -222,6 +222,8 @@ class _PlansAndPricing_2State extends State<PlansAndPricing_2> {
     selectedPackage = packages.first;
   }
 
+  double _animatedHeight = 100.0;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -243,6 +245,10 @@ class _PlansAndPricing_2State extends State<PlansAndPricing_2> {
             SizedBox(
               height: 10,
             ),
+            // Container(
+            //   height: 200,
+            //     child: AnimateContentExample(),
+            // ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Column(
@@ -253,12 +259,13 @@ class _PlansAndPricing_2State extends State<PlansAndPricing_2> {
                     Stack(
                       clipBehavior: Clip.none,
                       children: [
+
                         InkWell(
                           onTap: () {
                             selectedPackage = p;
                             setState(() {});
                           },
-                          child: Container(
+                          child: AnimatedContainer(
                             margin: EdgeInsets.symmetric(vertical: 8),
                             // width: size.width * 0.23,
                             // height: size.height * 0.06,
@@ -276,6 +283,7 @@ class _PlansAndPricing_2State extends State<PlansAndPricing_2> {
                                   : Colors.white,
                               borderRadius: BorderRadius.circular(12),
                             ),
+                            duration: Duration(seconds: 1),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -686,6 +694,49 @@ class PlansAndPricing_3 extends StatelessWidget {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class AnimateContentExample extends StatefulWidget {
+  @override
+  _AnimateContentExampleState createState() => new _AnimateContentExampleState();
+}
+
+class _AnimateContentExampleState extends State<AnimateContentExample> {
+  double _animatedHeight = 100.0;
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(title: new Text("Animate Content"),),
+      body: new Column(
+        children: <Widget>[
+          new Card(
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                new GestureDetector(
+                  onTap: ()=>setState((){
+                    _animatedHeight!=0.0?_animatedHeight=0.0:_animatedHeight=100.0;
+                  }),
+                  child:  new Container(
+                    child: new Text("CLICK ME"),
+                    color: Colors.blueAccent,
+                    height: 25.0,
+                    width: 100.0,
+                  ),),
+                new AnimatedContainer(duration: const Duration(milliseconds: 120),
+                  child: new Text("Toggle Me"),
+                  height: _animatedHeight,
+                  color: Colors.tealAccent,
+                  width: 100.0,
+                )
+              ],
+            ) ,
+          )
         ],
       ),
     );

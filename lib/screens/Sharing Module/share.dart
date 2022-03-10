@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../colors.dart';
 import '../typography.dart';
+import 'SharingEndScreen.dart';
 
 class Share extends StatefulWidget {
   Share({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _MyHomePageState extends State<Share> {
 
   List<ShareModel> base = [
     ShareModel(
-    mainModuleTitle: 'Emphasis',
+    mainModuleTitle: 'Empathize',
       data: [
         ShareModelData(
         title: 'Create Personas',
@@ -39,7 +40,7 @@ class _MyHomePageState extends State<Share> {
       ],
   ),
     ShareModel(
-    mainModuleTitle: 'Emphasis',
+    mainModuleTitle: 'Ideation',
       data: [
         ShareModelData(
         title: 'Create Personas',
@@ -56,7 +57,7 @@ class _MyHomePageState extends State<Share> {
       ],
   ),
     ShareModel(
-    mainModuleTitle: 'Emphasis',
+    mainModuleTitle: 'Prototyping',
       data: [
         ShareModelData(
         title: 'Create Personas',
@@ -73,7 +74,7 @@ class _MyHomePageState extends State<Share> {
       ],
   ),
     ShareModel(
-    mainModuleTitle: 'Emphasis',
+    mainModuleTitle: 'User Testing',
       data: [
         ShareModelData(
         title: 'Create Personas',
@@ -147,10 +148,14 @@ class _MyHomePageState extends State<Share> {
     // log('${tilesTitles}');
     // log('${jsonEncode(base)}');
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: GlobalAppBar('Sharing', true),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            VerticalSpace(10),
+            Text('Select the sub-modules that you want to share.',
+            style: blackRegular16,),
             Column(
               children: base.map((element) => Padding(
                 padding: const EdgeInsets.all(18.0),
@@ -169,6 +174,7 @@ class _MyHomePageState extends State<Share> {
                       '${element.mainModuleTitle}',
                     ),
                     children: element.data!.map((e) => DezysExpansionTile(
+
                       title: e.title!,
                       value: e.value!,
                       onChange: (bool? value) {
@@ -183,23 +189,29 @@ class _MyHomePageState extends State<Share> {
             ),
             Center(
               child: MaterialButton(
-                minWidth: 400,
-                height: 45,
+                minWidth: 140,
+                height: 40,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
                 onPressed: () {
-                  log('${shareModelToJson(base)}');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SharingEndScreen(),
+                    ),
+                  );
                 },
                 color: purpleAccent,
                 child: Text(
-                  'Checkout',
+                  'Next',
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
                       color: Colors.white),
                 ),
               ),
+
             ),
           ],
         ),
@@ -225,6 +237,7 @@ class DezysExpansionTile extends StatelessWidget {
         elevation: 0,
         child: CheckboxListTile(
           checkColor: Colors.white,
+          tileColor: Colors.white,
           activeColor: purpleAccent,
           controlAffinity: ListTileControlAffinity.leading,
           value: value,
@@ -238,7 +251,7 @@ class DezysExpansionTile extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: accentText18,
+            style: accentRegular16,
           ),
         ),
       ),

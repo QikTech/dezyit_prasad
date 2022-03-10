@@ -29,11 +29,13 @@ final whiteBold18 = TextStyle(fontSize: 18, color: whitee, fontWeight: FontWeigh
 final grayRegular18 = TextStyle(fontSize: 18, color: grayy, fontWeight: FontWeight.w500);
 
 final blackRegular14 = TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.w400);
+final blackRegular16 = TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w400);
 final blackRegular12 = TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w400);
 
 final accentRegular12 = TextStyle(fontSize: 12, color: purpleAccent, fontWeight: FontWeight.w400);
 final accentRegular14 = TextStyle(fontSize: 14, color: purpleAccent, fontWeight: FontWeight.w400);
 final accentRegular16 = TextStyle(fontSize: 16, color: purpleAccent, fontWeight: FontWeight.w400);
+final accentMedium16 = TextStyle(fontSize: 16, color: purpleAccent, fontWeight: FontWeight.w500);
 final grayMedium14 = TextStyle(fontSize: 14, color: Color(0xff333333), fontWeight: FontWeight.w500);
 
 final gray33Regular20 = TextStyle(fontSize: 20, color: Color(0xff333333), fontWeight: FontWeight.w400);
@@ -43,12 +45,16 @@ final gray66Regular16 = TextStyle(fontSize: 16, color: Color(0xff666666), fontWe
 final gray33Regular16 = TextStyle(fontSize: 16, color: Color(0xff333333), fontWeight: FontWeight.w400);
 
 
+final grayBDRegular14 = TextStyle(fontSize: 14, color: Color(0xffBDBDBD), fontWeight: FontWeight.w400);
+
 final grayRegular14 = TextStyle(fontSize: 14, color: Color(0xff707070), fontWeight: FontWeight.w400);
 final grayRegular12 = TextStyle(fontSize: 12, color: Color(0xff707070), fontWeight: FontWeight.w400);
 final gray2Regular12 = TextStyle(fontSize: 12, color: Color(0xffA8A8A8), fontWeight: FontWeight.w400);
 
 final whiteLight16 = TextStyle(fontSize: 16, color: whitee, fontWeight: FontWeight.w300);
 final whiteRegular16 = TextStyle(fontSize: 16, color: whitee, fontWeight: FontWeight.w400);
+final whiteRegular12 = TextStyle(fontSize: 12, color: whitee, fontWeight: FontWeight.w400);
+final whiteMedium12 = TextStyle(fontSize: 12, color: whitee, fontWeight: FontWeight.w600);
 final whitePLACEHOLDER14 = TextStyle(fontSize: 14, color: Color(0xffbcbcbc), fontWeight: FontWeight.w400);
 
 
